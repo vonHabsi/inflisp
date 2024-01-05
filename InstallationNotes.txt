@@ -1,0 +1,102 @@
+Installation notes
+------------------
+
+Inflisp was developed with Borland Delphi3. A well known problem
+is that Borland some day replaced the unit dsgnintf.pas.
+The background is described in http://dn.codegear.com/article/27717
+
+So in newer versions of Delphi you've got to do a couple
+of things.
+
+In expr_reg.pas, replace
+
+uses
+  dsgnintf;
+
+by
+
+uses
+  designintf,
+  designeditors;
+
+
+The file expr_reg.pas contains the registration call for TLispExpression.
+TLispExpression is the main component of Inflisp which represents a call
+to the Lisp system. TLispExpression must be installed into a package
+of your own choice, for example a new one.
+
+It may be possible that you must add a reference to designide.dcp
+to your package.
+
+- Under the 'requires' section, add designide
+  The package will look like
+
+  package Package1;
+  ...
+  requires
+    designide,
+    rtl,
+    vcl;
+
+  contains
+    expr_reg in 'inflisp3.2\expr_reg.pas';
+
+  end.
+
+- Compile the package.
+  Normally there should be no more problems.
+
+- With the Personal Edition, there might be an error remaining, like
+  [Fatal Error] Package1.dpk(28): E2202 Package 'xmlrtl' needed 
+  but could not be found.
+
+  This is called the XMLRTL problem. See
+  http://andy.jgknet.de/oss/kylix/wiki/index.php/Delphi_2005_Personal_Edition_xmlrtl.dcp_fake
+  http://andy.jgknet.de/blog/
+
+- Get D2k5PExmlrtlFake.zip from the above address.
+- From that you get a xmlrtl.dcp, which you have to copy
+  to ...\Borland\BDS\3.0\lib
+- Then the package should be compilable.
+- The next step is to install the package. This can be done by 
+
+  View / Project Management / Package1.bpl / Right mouse click / Install
+
+- Now you have a new VCL category Inflisp with a component TLispExpression.
+
+---------------------------------------------------------------------------------------
+Another compiler error might occur.
+
+unit lspCreat;
+....
+
+procedure LspLockGC;
+begin
+  GcIsLocked := true;
+end;
+
+[Error] lspcreat.pas(416): E2064 Left side cannot be assigned to 
+
+In that case, go to the compiler options and active 
+assignable typed constants.
+
+
+---------------------------------------------------------------------------------------
+
+Compiling Demo.dpr
+------------------
+
+It might be the case that you get an error compiling this Delphi project.
+[Fatal Error] strng.pas(926): F2039 Cannot create output file 'c:\inflisp\inflisp3.2\dcu\strng.dcu' 
+
+This comes from the current default settings. In the Project Options, 
+choose an appropriate output directory, which must exist.
+
+Joachim Pimiskern, 9.Nov.2008
+
+
+
+
+
+
+

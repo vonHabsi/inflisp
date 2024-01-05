@@ -1,0 +1,7 @@
+Inflisp - Lisp interpreter for Delphi
+
+Inflisp is a Lisp interpreter written in Borland Pascal / Delphi. Its main purpose is to enhance Delphi applications with Artificial Intelligence, but you could also use it for scripting / automation. The name Inflisp was chosen because it's the successor of an OPS5-like inference engine Infmod. Inflisp is the AI motor of Augos 4, a Go playing program.
+
+Status: Freeware; modify and use it at your own risk. I'd be glad if you left a comment in the source files about the original author, Joachim Pimiskern.
+
+Download — http://www.augos.com/software/inflisp3.2.zip
